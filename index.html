@@ -1,1 +1,1469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PawSync — Smart Feeding. Happier Pets. Peace of Mind.</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ==========================================
+           1. BRAND VARIABLES & BASE STYLES
+           ========================================== */
+        :root {
+            --navy: #17324D;
+            --teal: #54B8A7;
+            --cream: #F7F4ED;
+            --white: #FFFFFF;
+            --dark-text: #20262E;
+            --gray-light: #f0ede6;
+            --gray-border: #e2ded5;
+            --font-heading: 'Poppins', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --transition: all 0.3s ease;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--dark-text);
+            background-color: var(--white);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, h4, .logo {
+            font-family: var(--font-heading);
+            color: var(--navy);
+            line-height: 1.2;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--teal);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: #439688;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--navy);
+            border-color: var(--navy);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--navy);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .btn-full {
+            width: 100%;
+        }
+
+        /* ==========================================
+           2. HEADER & NAVIGATION
+           ========================================== */
+        header {
+            background-color: var(--white);
+            border-bottom: 1px solid var(--gray-border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: var(--navy);
+        }
+
+        .logo span {
+            color: var(--teal);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--dark-text);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--teal);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--teal);
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.2rem;
+            margin-left: 10px;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -12px;
+            background-color: var(--teal);
+            color: var(--white);
+            font-size: 0.75rem;
+            font-weight: 700;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Mobile menu button */
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--navy);
+            cursor: pointer;
+        }
+
+        /* ==========================================
+           3. PAGE ROUTING / VISIBILITY
+           ========================================== */
+        .page {
+            display: none;
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        .page.active-page {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ==========================================
+           4. HOMEPAGE SECTIONS
+           ========================================== */
+        /* Hero */
+        .hero {
+            background-color: var(--cream);
+            padding: 80px 0;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hero-content p {
+            font-size: 1.15rem;
+            color: #4a5568;
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .hero-image img {
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            object-fit: cover;
+            width: 100%;
+            height: 420px;
+        }
+
+        /* Benefits */
+        .benefits {
+            padding: 90px 0;
+            background-color: var(--white);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 50px;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 30px;
+        }
+
+        .benefit-card {
+            background-color: var(--cream);
+            padding: 35px 25px;
+            border-radius: 8px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .benefit-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .benefit-card p {
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        /* Featured Product */
+        .featured-product {
+            padding: 90px 0;
+            background-color: #faf8f5;
+            border-top: 1px solid var(--gray-border);
+            border-bottom: 1px solid var(--gray-border);
+        }
+
+        .product-preview-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .product-image img {
+            border-radius: 12px;
+            width: 100%;
+            max-height: 450px;
+            object-fit: cover;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.06);
+        }
+
+        .product-details .price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--teal);
+            margin: 10px 0 20px 0;
+        }
+
+        .product-details p {
+            margin-bottom: 25px;
+            font-size: 1.05rem;
+            color: #4a5568;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 90px 0;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .step-card {
+            position: relative;
+            padding: 30px;
+            border: 1px solid var(--gray-border);
+            border-radius: 8px;
+            background: var(--white);
+        }
+
+        .step-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--teal);
+            opacity: 0.4;
+            margin-bottom: 10px;
+        }
+
+        .step-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        /* Why PawSync */
+        .why-pawsync {
+            padding: 90px 0;
+            background-color: var(--navy);
+            color: var(--white);
+        }
+
+        .why-pawsync h2 {
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+
+        .why-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .why-content p {
+            font-size: 1.15rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .trust-points {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .trust-item {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--teal);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Reviews */
+        .reviews {
+            padding: 90px 0;
+            background-color: var(--white);
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .review-card {
+            background-color: var(--cream);
+            padding: 30px;
+            border-radius: 8px;
+            border-left: 4px solid var(--teal);
+        }
+
+        .review-card p {
+            font-style: italic;
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+        }
+
+        .review-author {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--navy);
+        }
+
+        /* Email Capture */
+        .email-capture {
+            padding: 80px 0;
+            background-color: var(--cream);
+            text-align: center;
+        }
+
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .email-container p {
+            margin: 15px 0 30px 0;
+            color: #555;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 10px;
+        }
+
+        .newsletter-form input[type="email"] {
+            flex: 1;
+            padding: 14px 18px;
+            border: 1px solid var(--gray-border);
+            border-radius: 6px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .newsletter-form input[type="email"]:focus {
+            border-color: var(--teal);
+        }
+
+        /* ==========================================
+           5. SHOP PAGE
+           ========================================== */
+        .shop-page-section {
+            padding: 70px 0 90px 0;
+        }
+
+        .product-main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 70px;
+        }
+
+        .stars {
+            color: #f59e0b;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .product-subtitle {
+            font-weight: 500;
+            color: var(--teal);
+            margin-bottom: 15px;
+        }
+
+        .feature-list {
+            margin: 25px 0;
+        }
+
+        .feature-list li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+        }
+
+        .feature-list span {
+            color: var(--teal);
+            font-weight: bold;
+        }
+
+        .quantity-cart-row {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .quantity-picker {
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--gray-border);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .qty-btn {
+            background: var(--cream);
+            border: none;
+            width: 40px;
+            height: 48px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .qty-btn:hover {
+            background: var(--gray-border);
+        }
+
+        .qty-input {
+            width: 50px;
+            height: 48px;
+            border: none;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .product-extra-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            background-color: var(--cream);
+            padding: 40px;
+            border-radius: 8px;
+        }
+
+        .extra-box h3 {
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--teal);
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+
+        .extra-box ul li {
+            padding: 6px 0;
+            border-bottom: 1px dashed var(--gray-border);
+            font-size: 0.95rem;
+        }
+
+        .extra-box ul li:last-child {
+            border-bottom: none;
+        }
+
+        /* ==========================================
+           6. ABOUT PAGE
+           ========================================== */
+        .about-section {
+            padding: 80px 0;
+        }
+
+        .about-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px auto;
+        }
+
+        .about-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+        }
+
+        .about-header h2 {
+            font-size: 1.4rem;
+            color: var(--teal);
+            font-weight: 500;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto 70px auto;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .about-content p {
+            margin-bottom: 20px;
+        }
+
+        .mission-box {
+            background-color: var(--cream);
+            padding: 50px;
+            border-radius: 8px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .mission-box h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .principle-card {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 6px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+
+        .principle-card strong {
+            color: var(--navy);
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        /* ==========================================
+           7. FAQ PAGE
+           ========================================== */
+        .faq-section {
+            padding: 80px 0;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border: 1px solid var(--gray-border);
+            border-radius: 6px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            width: 100%;
+            text-align: left;
+            padding: 20px 25px;
+            background: var(--white);
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--navy);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .faq-question:hover {
+            background-color: var(--cream);
+        }
+
+        .faq-answer {
+            padding: 0 25px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            background-color: var(--white);
+            color: #555;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 25px 20px 25px;
+            max-height: 200px;
+        }
+
+        .faq-toggle-icon {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-toggle-icon {
+            transform: rotate(45deg);
+        }
+
+        /* ==========================================
+           8. CONTACT PAGE
+           ========================================== */
+        .contact-section {
+            padding: 80px 0;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+            gap: 60px;
+            margin-top: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--gray-border);
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--teal);
+        }
+
+        .contact-info-card {
+            background-color: var(--cream);
+            padding: 40px;
+            border-radius: 8px;
+            height: fit-content;
+        }
+
+        .contact-info-card h3 {
+            margin-bottom: 20px;
+        }
+
+        .info-item {
+            margin-bottom: 15px;
+        }
+
+        .info-item strong {
+            display: block;
+            color: var(--navy);
+        }
+
+        /* Notifications / Alerts */
+        .alert-toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--navy);
+            color: var(--white);
+            padding: 15px 25px;
+            border-radius: 6px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            display: none;
+            z-index: 2000;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* ==========================================
+           9. FOOTER
+           ========================================== */
+        footer {
+            background-color: var(--navy);
+            color: var(--white);
+            padding: 60px 0 30px 0;
+            margin-top: auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand .logo {
+            color: var(--white);
+            margin-bottom: 10px;
+        }
+
+        .footer-tagline {
+            opacity: 0.8;
+            font-size: 0.95rem;
+        }
+
+        .footer-links h4, .footer-social h4 {
+            color: var(--teal);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links ul li a:hover {
+            color: var(--teal);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            background: rgba(255,255,255,0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            background: var(--teal);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+
+        /* ==========================================
+           10. RESPONSIVE MEDIA QUERIES
+           ========================================== */
+        @media (max-width: 900px) {
+            .hero-grid, .product-preview-grid, .product-main-grid, .contact-grid, .product-extra-info {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                flex-direction: column;
+                padding: 20px 0;
+                border-bottom: 1px solid var(--gray-border);
+                display: none;
+                gap: 15px;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .quantity-cart-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .quantity-picker {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==========================================
+         HEADER & NAVIGATION
+         ========================================== -->
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo" onclick="switchPage('home'); return false;">Paw<span>Sync</span></a>
+            
+            <button class="mobile-toggle" onclick="toggleMobileMenu()" aria-label="Toggle navigation">☰</button>
+
+            <nav class="nav-menu" id="navMenu">
+                <a href="#home" class="nav-link active" onclick="switchPage('home'); return false;">HOME</a>
+                <a href="#shop" class="nav-link" onclick="switchPage('shop'); return false;">SHOP</a>
+                <a href="#about" class="nav-link" onclick="switchPage('about'); return false;">ABOUT</a>
+                <a href="#faq" class="nav-link" onclick="switchPage('faq'); return false;">FAQ</a>
+                <a href="#contact" class="nav-link" onclick="switchPage('contact'); return false;">CONTACT</a>
+                <div class="cart-icon" onclick="switchPage('shop'); return false;">
+                    🛒 <span class="cart-badge" id="cartCount">0</span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- ==========================================
+             PAGE 1: HOMEPAGE
+             ========================================== -->
+        <section id="home" class="page active-page">
+            <!-- Hero -->
+            <div class="hero">
+                <div class="container hero-grid">
+                    <div class="hero-content">
+                        <h1>Never Miss Their Mealtime.</h1>
+                        <p>Smart feeding designed for busy pet parents. Schedule meals, manage portions, and stay connected to your pet's routine wherever life takes you.</p>
+                        <div class="hero-buttons">
+                            <button class="btn btn-primary" onclick="switchPage('shop')">SHOP PAWSYNC</button>
+                            <button class="btn btn-secondary" onclick="scrollToSection('how-it-works')">SEE HOW IT WORKS</button>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=800&q=80" alt="Happy dog beside modern smart pet feeder">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Benefits -->
+            <div class="benefits">
+                <div class="container">
+                    <h2 class="section-title">Smarter Feeding. Less Worry.</h2>
+                    <div class="benefits-grid">
+                        <div class="benefit-card">
+                            <span class="benefit-icon">📱</span>
+                            <h3>App Control</h3>
+                            <p>Manage your pet's feeding schedule from your phone.</p>
+                        </div>
+                        <div class="benefit-card">
+                            <span class="benefit-icon">⏰</span>
+                            <h3>Scheduled Meals</h3>
+                            <p>Keep mealtimes consistent even when you're away.</p>
+                        </div>
+                        <div class="benefit-card">
+                            <span class="benefit-icon">⚖️</span>
+                            <h3>Portion Control</h3>
+                            <p>Serve controlled portions to support healthier feeding habits.</p>
+                        </div>
+                        <div class="benefit-card">
+                            <span class="benefit-icon">🔔</span>
+                            <h3>Smart Alerts</h3>
+                            <p>Stay informed about your pet's feeding routine.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Product -->
+            <div class="featured-product">
+                <div class="container">
+                    <h2 class="section-title">Meet the PawSync Smart Feeder</h2>
+                    <div class="product-preview-grid">
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=800&q=80" alt="PawSync Smart Automatic Pet Feeder">
+                        </div>
+                        <div class="product-details">
+                            <h3>PawSync Smart Automatic Pet Feeder</h3>
+                            <div class="price">CAD $129.99</div>
+                            <p>A smarter way to manage everyday feeding. PawSync combines scheduled feeding, portion management and convenient app control in one modern device designed for today's busy pet parents.</p>
+                            <div class="hero-buttons">
+                                <button class="btn btn-primary" onclick="addToCart(1)">ADD TO CART</button>
+                                <button class="btn btn-secondary" onclick="switchPage('shop')">LEARN MORE</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- How It Works -->
+            <div class="how-it-works" id="how-it-works">
+                <div class="container">
+                    <h2 class="section-title">Healthy Routines in 3 Simple Steps</h2>
+                    <div class="steps-grid">
+                        <div class="step-card">
+                            <div class="step-number">01</div>
+                            <h3>1. Fill</h3>
+                            <p>Add your pet's dry food to the PawSync feeder.</p>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-number">02</div>
+                            <h3>2. Schedule</h3>
+                            <p>Set meal times and portions based on your pet's routine.</p>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-number">03</div>
+                            <h3>3. Stay Connected</h3>
+                            <p>Manage feeding and check your schedule through your smartphone.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Why PawSync -->
+            <div class="why-pawsync">
+                <div class="container why-content">
+                    <h2>Made for Pets. Designed for Real Life.</h2>
+                    <p>Busy schedules shouldn't mean inconsistent pet care. PawSync helps pet owners create dependable feeding routines while giving them greater flexibility and peace of mind.</p>
+                    <div class="trust-points">
+                        <div class="trust-item">✓ Simple Setup</div>
+                        <div class="trust-item">✓ Reliable Feeding</div>
+                        <div class="trust-item">✓ Designed for Busy Pet Parents</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reviews -->
+            <div class="reviews">
+                <div class="container">
+                    <h2 class="section-title">Customer Experience</h2>
+                    <div class="reviews-grid">
+                        <div class="review-card">
+                            <p>“PawSync would make managing feeding much easier on busy workdays.”</p>
+                            <div class="review-author">— Sample Customer Persona</div>
+                        </div>
+                        <div class="review-card">
+                            <p>“I like being able to plan meals ahead instead of worrying about getting home exactly at feeding time.”</p>
+                            <div class="review-author">— Sample Customer Persona</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Email Capture -->
+            <div class="email-capture">
+                <div class="container email-container">
+                    <h2>Join the PawSync Pack</h2>
+                    <p>Get smart pet-care tips, product updates and 10% off your first PawSync order.</p>
+                    <form class="newsletter-form" onsubmit="handleEmailSubmit(event)">
+                        <input type="email" placeholder="Enter your email" required>
+                        <button type="submit" class="btn btn-primary">GET 10% OFF</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             PAGE 2: SHOP PAGE
+             ========================================== -->
+        <section id="shop" class="page">
+            <div class="shop-page-section">
+                <div class="container">
+                    <div class="product-main-grid">
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=800&q=80" alt="PawSync Smart Automatic Pet Feeder">
+                        </div>
+                        <div>
+                            <h1>PawSync Smart Automatic Pet Feeder</h1>
+                            <div class="price" style="font-size: 1.8rem; color: var(--teal); font-weight: 700; margin: 10px 0;">CAD $129.99</div>
+                            <div class="stars">★★★★★ <span style="color: #666; font-size: 0.9rem;">(5.0 Rating)</span></div>
+                            <div class="product-subtitle">Designed for modern pet parents</div>
+                            
+                            <p>Take the stress out of mealtime. The PawSync Smart Automatic Pet Feeder helps you schedule meals, manage portions and maintain a consistent feeding routine—even when you're away from home.</p>
+
+                            <ul class="feature-list">
+                                <li><span>✓</span> Custom feeding schedules</li>
+                                <li><span>✓</span> Portion-controlled dispensing</li>
+                                <li><span>✓</span> Smartphone connectivity</li>
+                                <li><span>✓</span> Feeding notifications</li>
+                                <li><span>✓</span> Large food storage capacity</li>
+                                <li><span>✓</span> Easy-to-clean design</li>
+                                <li><span>✓</span> Modern pet-friendly appearance</li>
+                            </ul>
+
+                            <div class="quantity-cart-row">
+                                <div class="quantity-picker">
+                                    <button class="qty-btn" onclick="updateQty(-1)">-</button>
+                                    <input type="text" id="shopQty" class="qty-input" value="1" readonly>
+                                    <button class="qty-btn" onclick="updateQty(1)">+</button>
+                                </div>
+                                <button class="btn btn-primary btn-full" onclick="addShopItemToCart()">ADD TO CART</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Extra Info Box -->
+                    <div class="product-extra-info">
+                        <div class="extra-box">
+                            <h3>What's Included</h3>
+                            <ul>
+                                <li>PawSync Smart Feeder</li>
+                                <li>Power Adapter</li>
+                                <li>Feeding Bowl</li>
+                                <li>Quick Start Guide</li>
+                            </ul>
+                        </div>
+                        <div class="extra-box">
+                            <h3>Perfect For</h3>
+                            <p style="margin-top: 10px; line-height: 1.8;">
+                                Busy professionals • Students • Frequent travellers • Multi-pet households • Pet parents with changing schedules
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             PAGE 3: ABOUT PAGE
+             ========================================== -->
+        <section id="about" class="page">
+            <div class="about-section">
+                <div class="container">
+                    <div class="about-header">
+                        <h1>About PawSync</h1>
+                        <h2>Smarter Pet Care Starts with a Better Routine</h2>
+                    </div>
+
+                    <div class="about-content">
+                        <p>At PawSync, we understand that pet parents want to provide consistent care even when life gets busy.</p>
+                        <p>Work, school, travel and changing schedules can make regular feeding times difficult to maintain. PawSync was created to make everyday feeding simpler, smarter and more dependable.</p>
+                        <p>Our smart feeding solution combines convenient scheduling, portion management and connected technology to help pet parents manage their pets' routines with greater confidence.</p>
+                    </div>
+
+                    <div class="mission-box">
+                        <h2>Our Mission</h2>
+                        <p style="text-align: center; font-size: 1.1rem; margin-bottom: 25px;">Our mission is simple: use practical technology to make everyday pet care easier while supporting healthier and more consistent routines.</p>
+                        <p style="text-align: center; font-weight: 600; color: var(--navy);">PawSync is designed around three principles:</p>
+                        
+                        <div class="principles-grid">
+                            <div class="principle-card">
+                                <strong>Convenience</strong>
+                                Pet care should fit into modern lifestyles.
+                            </div>
+                            <div class="principle-card">
+                                <strong>Consistency</strong>
+                                Reliable routines contribute to better everyday care.
+                            </div>
+                            <div class="principle-card">
+                                <strong>Connection</strong>
+                                Technology should help pet parents feel connected even when they cannot be physically present.
+                            </div>
+                        </div>
+
+                        <p style="text-align: center; margin-top: 30px; font-style: italic;">Because when their routine is taken care of, you can spend less time worrying—and more time enjoying life together.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             PAGE 4: FAQ PAGE
+             ========================================== -->
+        <section id="faq" class="page">
+            <div class="faq-section">
+                <div class="container faq-container">
+                    <h1 class="section-title">Frequently Asked Questions</h1>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            <span>Does PawSync work with cats and dogs?</span>
+                            <span class="faq-toggle-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>PawSync is designed for cats and small-to-medium dogs that eat compatible dry food.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            <span>Can I schedule multiple meals?</span>
+                            <span class="faq-toggle-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes. PawSync is designed to support scheduled feeding throughout the day.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            <span>Can I control portion sizes?</span>
+                            <span class="faq-toggle-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes. Portion management is one of PawSync's core smart-feeding features.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            <span>What happens if I'm away from home?</span>
+                            <span class="faq-toggle-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Scheduled feeding allows your pet's routine to continue while you're away.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            <span>Is PawSync difficult to clean?</span>
+                            <span class="faq-toggle-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>The feeding components are designed to be removable for easier routine cleaning.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            <span>Do I need a smartphone?</span>
+                            <span class="faq-toggle-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Smartphone connectivity is required to access PawSync's connected features.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             PAGE 5: CONTACT PAGE
+             ========================================== -->
+        <section id="contact" class="page">
+            <div class="contact-section">
+                <div class="container">
+                    <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+                        <h1>We're Here to Help</h1>
+                        <p style="margin-top: 10px; color: #555;">Questions about PawSync? We'd love to hear from you.</p>
+                    </div>
+
+                    <div class="contact-grid">
+                        <form onsubmit="handleContactSubmit(event)">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" required placeholder="Your full name">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" required placeholder="your.email@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" required placeholder="How can we help?">
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" rows="5" required placeholder="Write your message here..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">SEND MESSAGE</button>
+                        </form>
+
+                        <div class="contact-info-card">
+                            <h3>Customer Support</h3>
+                            <div class="info-item">
+                                <strong>Hours:</strong>
+                                Monday–Friday<br>
+                                9:00 AM–5:00 PM EST
+                            </div>
+                            <div class="info-item" style="margin-top: 20px;">
+                                <strong>Email:</strong>
+                                support@pawsync.com
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==========================================
+         FOOTER
+         ========================================== -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">Paw<span>Sync</span></div>
+                    <div class="footer-tagline">Smart Feeding. Happier Pets. Peace of Mind.</div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#shop" onclick="switchPage('shop'); return false;">Shop</a></li>
+                        <li><a href="#about" onclick="switchPage('about'); return false;">About</a></li>
+                        <li><a href="#faq" onclick="switchPage('faq'); return false;">FAQ</a></li>
+                        <li><a href="#contact" onclick="switchPage('contact'); return false;">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Follow Us</h4>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Instagram">📷</a>
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="TikTok">🎵</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 PawSync. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="alert-toast">Notification message</div>
+
+    <!-- ==========================================
+         JAVASCRIPT CONTROLLERS
+         ========================================== -->
+    <script>
+        // Page Navigation Logic
+        function switchPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active-page'));
+
+            // Show selected page
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active-page');
+            }
+
+            // Update active nav link
+            const links = document.querySelectorAll('.nav-link');
+            links.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + pageId) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Close mobile menu if open
+            document.getElementById('navMenu').classList.remove('active');
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Toggle Mobile Menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('navMenu');
+            menu.classList.toggle('active');
+        }
+
+        // Scroll to specific section on current page
+        function scrollToSection(sectionId) {
+            const el = document.getElementById(sectionId);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // FAQ Toggle Logic
+        function toggleFaq(buttonElement) {
+            const item = buttonElement.parentElement;
+            const isActive = item.classList.contains('active');
+            
+            // Close all FAQ items
+            document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+
+            // Open clicked if it wasn't open
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        }
+
+        // Shop Quantity Picker
+        let currentQty = 1;
+        function updateQty(change) {
+            currentQty += change;
+            if (currentQty < 1) currentQty = 1;
+            document.getElementById('shopQty').value = currentQty;
+        }
+
+        // Cart System
+        let cartCount = 0;
+        function addToCart(amount) {
+            cartCount += amount;
+            document.getElementById('cartCount').innerText = cartCount;
+            showToast(`Added ${amount} PawSync Smart Feeder(s) to your cart!`);
+        }
+
+        function addShopItemToCart() {
+            addToCart(currentQty);
+        }
+
+        // Form Handlers
+        function handleEmailSubmit(event) {
+            event.preventDefault();
+            showToast('Thank you for subscribing! Your 10% discount code is PAWSYNC10.');
+            event.target.reset();
+        }
+
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            showToast('Thank you! Your message has been sent to Customer Support.');
+            event.target.reset();
+        }
+
+        // Notification Toast
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.innerText = message;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 4000);
+        }
+
+        // Handle URL Hash navigation on load
+        window.addEventListener('load', () => {
+            const hash = window.location.hash.replace('#', '');
+            if (['home', 'shop', 'about', 'faq', 'contact'].includes(hash)) {
+                switchPage(hash);
+            }
+        });
+    </script>
+</body>
+</html>
