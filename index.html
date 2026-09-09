@@ -306,11 +306,47 @@
             color: #555;
         }
 
+        /* Multi-Meal Showcase Section */
+        .multi-meal-showcase {
+            padding: 80px 0;
+            background-color: var(--cream);
+            border-top: 1px solid var(--gray-border);
+            border-bottom: 1px solid var(--gray-border);
+        }
+
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .showcase-image img {
+            border-radius: 12px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+            width: 100%;
+            max-height: 450px;
+            object-fit: contain;
+            background-color: var(--white);
+            padding: 10px;
+        }
+
+        .showcase-content h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+
+        .showcase-content p {
+            font-size: 1.05rem;
+            color: #4a5568;
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+
         /* Featured Product */
         .featured-product {
             padding: 90px 0;
             background-color: #faf8f5;
-            border-top: 1px solid var(--gray-border);
             border-bottom: 1px solid var(--gray-border);
         }
 
@@ -851,17 +887,20 @@
 
         .social-icons a {
             background: rgba(255,255,255,0.1);
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: var(--transition);
+            color: var(--white);
         }
 
         .social-icons a:hover {
             background: var(--teal);
+            color: var(--white);
+            transform: translateY(-2px);
         }
 
         .footer-bottom {
@@ -876,7 +915,7 @@
            10. RESPONSIVE MEDIA QUERIES
            ========================================== */
         @media (max-width: 900px) {
-            .hero-grid, .product-preview-grid, .contact-grid, .product-extra-info {
+            .hero-grid, .product-preview-grid, .contact-grid, .product-extra-info, .showcase-grid {
                 grid-template-columns: 1fr;
                 gap: 40px;
             }
@@ -993,6 +1032,20 @@
                             <h3>Smart Alerts</h3>
                             <p>Stay informed about your pet's feeding routine.</p>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Multi-Meal Showcase Section (IMG_0938.JPG) -->
+            <div class="multi-meal-showcase">
+                <div class="container showcase-grid">
+                    <div class="showcase-image">
+                        <img src="./IMG_0938.JPG" alt="PawSync Multi-Compartment Smart Feeder">
+                    </div>
+                    <div class="showcase-content">
+                        <h2>Variety & Custom Portions for Every Meal</h2>
+                        <p>Serve dry food, wet food, or treats effortlessly. Our multi-compartment smart feeder keeps meals fresh and automatically dispenses on your scheduled routine so cats and dogs stay happy and well-fed all day long.</p>
+                        <button class="btn btn-primary" onclick="switchPage('shop')">EXPLORE FEEDERS</button>
                     </div>
                 </div>
             </div>
@@ -1333,7 +1386,7 @@
         </section>
     </main>
 
-  <!-- ==========================================
+    <!-- ==========================================
          FOOTER
          ========================================== -->
     <footer>
@@ -1383,6 +1436,7 @@
             </div>
         </div>
     </footer>
+
     <!-- Toast Notification -->
     <div id="toast" class="alert-toast">Notification message</div>
 
