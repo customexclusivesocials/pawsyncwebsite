@@ -325,7 +325,9 @@
             border-radius: 12px;
             width: 100%;
             max-height: 450px;
-            object-fit: cover;
+            object-fit: contain;
+            background-color: #fff;
+            padding: 10px;
             box-shadow: 0 15px 30px rgba(0,0,0,0.06);
         }
 
@@ -483,84 +485,85 @@
         }
 
         /* ==========================================
-           5. SHOP PAGE
+           5. SHOP PAGE (4-PRODUCT CATALOG GRID)
            ========================================== */
         .shop-page-section {
             padding: 70px 0 90px 0;
         }
 
-        .product-main-grid {
+        .shop-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .shop-header h1 {
+            font-size: 2.6rem;
+            margin-bottom: 10px;
+        }
+
+        .shop-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 35px;
             margin-bottom: 70px;
+        }
+
+        .product-card {
+            background: var(--white);
+            border: 1px solid var(--gray-border);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+            border-color: var(--teal);
+        }
+
+        .product-card-img {
+            width: 100%;
+            height: 280px;
+            object-fit: contain;
+            background-color: #faf8f5;
+            padding: 20px;
+            border-bottom: 1px solid var(--gray-border);
+        }
+
+        .product-card-body {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-card-title {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: var(--navy);
         }
 
         .stars {
             color: #f59e0b;
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             margin-bottom: 10px;
         }
 
-        .product-subtitle {
-            font-weight: 500;
+        .product-card-desc {
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .product-card-price {
+            font-size: 1.35rem;
+            font-weight: 700;
             color: var(--teal);
             margin-bottom: 15px;
-        }
-
-        .feature-list {
-            margin: 25px 0;
-        }
-
-        .feature-list li {
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.95rem;
-        }
-
-        .feature-list span {
-            color: var(--teal);
-            font-weight: bold;
-        }
-
-        .quantity-cart-row {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-            margin-top: 30px;
-        }
-
-        .quantity-picker {
-            display: flex;
-            align-items: center;
-            border: 1px solid var(--gray-border);
-            border-radius: 6px;
-            overflow: hidden;
-        }
-
-        .qty-btn {
-            background: var(--cream);
-            border: none;
-            width: 40px;
-            height: 48px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .qty-btn:hover {
-            background: var(--gray-border);
-        }
-
-        .qty-input {
-            width: 50px;
-            height: 48px;
-            border: none;
-            text-align: center;
-            font-size: 1rem;
-            font-weight: 600;
         }
 
         .product-extra-info {
@@ -873,7 +876,7 @@
            10. RESPONSIVE MEDIA QUERIES
            ========================================== */
         @media (max-width: 900px) {
-            .hero-grid, .product-preview-grid, .product-main-grid, .contact-grid, .product-extra-info {
+            .hero-grid, .product-preview-grid, .contact-grid, .product-extra-info {
                 grid-template-columns: 1fr;
                 gap: 40px;
             }
@@ -915,15 +918,6 @@
 
             .newsletter-form {
                 flex-direction: column;
-            }
-
-            .quantity-cart-row {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .quantity-picker {
-                justify-content: center;
             }
         }
     </style>
@@ -969,7 +963,7 @@
                         </div>
                     </div>
                     <div class="hero-image">
-                        <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=800&q=80" alt="Happy dog beside modern smart pet feeder">
+                        <img src="./Smart Automatic pet feeder.jpeg" alt="PawSync Smart Pet Feeder">
                     </div>
                 </div>
             </div>
@@ -1009,15 +1003,15 @@
                     <h2 class="section-title">Meet the PawSync Smart Feeder</h2>
                     <div class="product-preview-grid">
                         <div class="product-image">
-                            <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=800&q=80" alt="PawSync Smart Automatic Pet Feeder">
+                            <img src="./Smart Automatic pet feeder.jpeg" alt="PawSync Smart Automatic Pet Feeder">
                         </div>
                         <div class="product-details">
                             <h3>PawSync Smart Automatic Pet Feeder</h3>
                             <div class="price">CAD $129.99</div>
                             <p>A smarter way to manage everyday feeding. PawSync combines scheduled feeding, portion management and convenient app control in one modern device designed for today's busy pet parents.</p>
                             <div class="hero-buttons">
-                                <button class="btn btn-primary" onclick="addToCart(1)">ADD TO CART</button>
-                                <button class="btn btn-secondary" onclick="switchPage('shop')">LEARN MORE</button>
+                                <button class="btn btn-primary" onclick="addToCart('PawSync Smart Automatic Pet Feeder')">ADD TO CART</button>
+                                <button class="btn btn-secondary" onclick="switchPage('shop')">VIEW ALL PRODUCTS</button>
                             </div>
                         </div>
                     </div>
@@ -1092,40 +1086,62 @@
         </section>
 
         <!-- ==========================================
-             PAGE 2: SHOP PAGE
+             PAGE 2: SHOP PAGE (4 PRODUCTS)
              ========================================== -->
         <section id="shop" class="page">
             <div class="shop-page-section">
                 <div class="container">
-                    <div class="product-main-grid">
-                        <div class="product-image">
-                            <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=800&q=80" alt="PawSync Smart Automatic Pet Feeder">
+                    <div class="shop-header">
+                        <h1>Our Smart Pet Products</h1>
+                        <p>Explore our complete ecosystem of connected pet-care essentials.</p>
+                    </div>
+
+                    <div class="shop-grid">
+                        <!-- Product 1 -->
+                        <div class="product-card">
+                            <img src="./Smart Automatic pet feeder.jpeg" alt="Smart Automatic Pet Feeder" class="product-card-img">
+                            <div class="product-card-body">
+                                <h3 class="product-card-title">Smart Automatic Pet Feeder</h3>
+                                <div class="stars">★★★★★</div>
+                                <p class="product-card-desc">Schedule meals, manage portions, and maintain a consistent routine through smartphone app connectivity.</p>
+                                <div class="product-card-price">CAD $129.99</div>
+                                <button class="btn btn-primary btn-full" onclick="addToCart('Smart Automatic Pet Feeder')">ADD TO CART</button>
+                            </div>
                         </div>
-                        <div>
-                            <h1>PawSync Smart Automatic Pet Feeder</h1>
-                            <div class="price" style="font-size: 1.8rem; color: var(--teal); font-weight: 700; margin: 10px 0;">CAD $129.99</div>
-                            <div class="stars">★★★★★ <span style="color: #666; font-size: 0.9rem;">(5.0 Rating)</span></div>
-                            <div class="product-subtitle">Designed for modern pet parents</div>
-                            
-                            <p>Take the stress out of mealtime. The PawSync Smart Automatic Pet Feeder helps you schedule meals, manage portions and maintain a consistent feeding routine—even when you're away from home.</p>
 
-                            <ul class="feature-list">
-                                <li><span>✓</span> Custom feeding schedules</li>
-                                <li><span>✓</span> Portion-controlled dispensing</li>
-                                <li><span>✓</span> Smartphone connectivity</li>
-                                <li><span>✓</span> Feeding notifications</li>
-                                <li><span>✓</span> Large food storage capacity</li>
-                                <li><span>✓</span> Easy-to-clean design</li>
-                                <li><span>✓</span> Modern pet-friendly appearance</li>
-                            </ul>
+                        <!-- Product 2 -->
+                        <div class="product-card">
+                            <img src="./Pawsync Pet Camera .jpeg" alt="PawSync Pet Camera" class="product-card-img">
+                            <div class="product-card-body">
+                                <h3 class="product-card-title">PawSync Pet Camera</h3>
+                                <div class="stars">★★★★★</div>
+                                <p class="product-card-desc">Check in on your pets anytime with HD live streaming, night vision, and motion-tracking alerts.</p>
+                                <div class="product-card-price">CAD $69.99</div>
+                                <button class="btn btn-primary btn-full" onclick="addToCart('PawSync Pet Camera')">ADD TO CART</button>
+                            </div>
+                        </div>
 
-                            <div class="quantity-cart-row">
-                                <div class="quantity-picker">
-                                    <button class="qty-btn" onclick="updateQty(-1)">-</button>
-                                    <input type="text" id="shopQty" class="qty-input" value="1" readonly>
-                                    <button class="qty-btn" onclick="updateQty(1)">+</button>
-                                </div>
-                                <button class="btn btn-primary btn-full" onclick="addShopItemToCart()">ADD TO CART</button>
+                        <!-- Product 3 -->
+                        <div class="product-card">
+                            <img src="./PawSync Smart water fountain .jpeg" alt="PawSync Smart Water Fountain" class="product-card-img">
+                            <div class="product-card-body">
+                                <h3 class="product-card-title">PawSync Smart Water Fountain</h3>
+                                <div class="stars">★★★★★</div>
+                                <p class="product-card-desc">Continuous flowing water with dynamic filtration to encourage hydration and keep water fresh.</p>
+                                <div class="product-card-price">CAD $79.99</div>
+                                <button class="btn btn-primary btn-full" onclick="addToCart('PawSync Smart Water Fountain')">ADD TO CART</button>
+                            </div>
+                        </div>
+
+                        <!-- Product 4 -->
+                        <div class="product-card">
+                            <img src="./PawSync Smart Treat Dispenser .jpeg" alt="PawSync Smart Treat Dispenser" class="product-card-img">
+                            <div class="product-card-body">
+                                <h3 class="product-card-title">PawSync Smart Treat Dispenser</h3>
+                                <div class="stars">★★★★★</div>
+                                <p class="product-card-desc">Reward and interact with your pets remotely by tossing treats right from your phone.</p>
+                                <div class="product-card-price">CAD $59.99</div>
+                                <button class="btn btn-primary btn-full" onclick="addToCart('PawSync Smart Treat Dispenser')">ADD TO CART</button>
                             </div>
                         </div>
                     </div>
@@ -1133,12 +1149,12 @@
                     <!-- Extra Info Box -->
                     <div class="product-extra-info">
                         <div class="extra-box">
-                            <h3>What's Included</h3>
+                            <h3>What's Included with PawSync Devices</h3>
                             <ul>
-                                <li>PawSync Smart Feeder</li>
-                                <li>Power Adapter</li>
-                                <li>Feeding Bowl</li>
-                                <li>Quick Start Guide</li>
+                                <li>PawSync Smart Hardware Device</li>
+                                <li>Power Adapter & Cable</li>
+                                <li>Filter/Bowl Assembly (where applicable)</li>
+                                <li>Quick Start Guide & App Link</li>
                             </ul>
                         </div>
                         <div class="extra-box">
@@ -1414,24 +1430,12 @@
             }
         }
 
-        // Shop Quantity Picker
-        let currentQty = 1;
-        function updateQty(change) {
-            currentQty += change;
-            if (currentQty < 1) currentQty = 1;
-            document.getElementById('shopQty').value = currentQty;
-        }
-
         // Cart System
         let cartCount = 0;
-        function addToCart(amount) {
-            cartCount += amount;
+        function addToCart(productName) {
+            cartCount += 1;
             document.getElementById('cartCount').innerText = cartCount;
-            showToast(`Added ${amount} PawSync Smart Feeder(s) to your cart!`);
-        }
-
-        function addShopItemToCart() {
-            addToCart(currentQty);
+            showToast(`Added 1x ${productName} to your cart!`);
         }
 
         // Form Handlers
