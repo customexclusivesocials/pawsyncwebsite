@@ -173,19 +173,28 @@
             cursor: pointer;
             font-size: 1.2rem;
             margin-left: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 12px;
+            background-color: var(--cream);
+            border-radius: 20px;
+            border: 1px solid var(--gray-border);
+            transition: var(--transition);
+        }
+
+        .cart-icon:hover {
+            border-color: var(--teal);
         }
 
         .cart-badge {
-            position: absolute;
-            top: -8px;
-            right: -12px;
             background-color: var(--teal);
             color: var(--white);
             font-size: 0.75rem;
             font-weight: 700;
             border-radius: 50%;
-            width: 18px;
-            height: 18px;
+            width: 20px;
+            height: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -629,7 +638,118 @@
         }
 
         /* ==========================================
-           6. ABOUT PAGE
+           6. CHECKOUT PAGE (MOCK DEMO SCREEN)
+           ========================================== */
+        .checkout-section {
+            padding: 70px 0 90px 0;
+            background-color: #faf8f5;
+        }
+
+        .checkout-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .demo-notice-banner {
+            background-color: #e6f7f4;
+            border: 1px solid var(--teal);
+            color: #1f6357;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .checkout-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+        }
+
+        .cart-summary-box, .checkout-form-box {
+            background-color: var(--white);
+            border: 1px solid var(--gray-border);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+
+        .cart-item-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--gray-border);
+        }
+
+        .cart-item-details strong {
+            display: block;
+            color: var(--navy);
+            font-size: 1rem;
+        }
+
+        .cart-item-details span {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .cart-qty-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .qty-btn {
+            background: var(--cream);
+            border: 1px solid var(--gray-border);
+            width: 28px;
+            height: 28px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .qty-btn:hover {
+            background: var(--teal);
+            color: var(--white);
+        }
+
+        .cart-total-summary {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 2px dashed var(--gray-border);
+        }
+
+        .summary-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .summary-line.total {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-top: 15px;
+            border-top: 1px solid var(--gray-border);
+            padding-top: 10px;
+        }
+
+        .mock-badge {
+            background: #fff3cd;
+            color: #856404;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        /* ==========================================
+           7. ABOUT PAGE
            ========================================== */
         .about-section {
             padding: 80px 0;
@@ -699,7 +819,7 @@
         }
 
         /* ==========================================
-           7. FAQ PAGE
+           8. FAQ PAGE
            ========================================== */
         .faq-section {
             padding: 80px 0;
@@ -761,7 +881,7 @@
         }
 
         /* ==========================================
-           8. CONTACT PAGE
+           9. CONTACT PAGE
            ========================================== */
         .contact-section {
             padding: 80px 0;
@@ -840,7 +960,7 @@
         }
 
         /* ==========================================
-           9. FOOTER
+           10. FOOTER
            ========================================== */
         footer {
             background-color: var(--navy);
@@ -912,10 +1032,10 @@
         }
 
         /* ==========================================
-           10. RESPONSIVE MEDIA QUERIES
+           11. RESPONSIVE MEDIA QUERIES
            ========================================== */
         @media (max-width: 900px) {
-            .hero-grid, .product-preview-grid, .contact-grid, .product-extra-info, .showcase-grid {
+            .hero-grid, .product-preview-grid, .contact-grid, .product-extra-info, .showcase-grid, .checkout-grid {
                 grid-template-columns: 1fr;
                 gap: 40px;
             }
@@ -978,8 +1098,10 @@
                 <a href="#about" class="nav-link" onclick="switchPage('about'); return false;">ABOUT</a>
                 <a href="#faq" class="nav-link" onclick="switchPage('faq'); return false;">FAQ</a>
                 <a href="#contact" class="nav-link" onclick="switchPage('contact'); return false;">CONTACT</a>
-                <div class="cart-icon" onclick="switchPage('shop'); return false;">
-                    🛒 <span class="cart-badge" id="cartCount">0</span>
+                
+                <!-- Clicking Cart opens the Checkout page preview -->
+                <div class="cart-icon" onclick="switchPage('checkout'); return false;" title="View Checkout / Cart">
+                    🛒 <span>Cart</span> <span class="cart-badge" id="cartCount">0</span>
                 </div>
             </nav>
         </div>
@@ -1063,7 +1185,7 @@
                             <div class="price">CAD $129.99</div>
                             <p>A smarter way to manage everyday feeding. PawSync combines scheduled feeding, portion management and convenient app control in one modern device designed for today's busy pet parents.</p>
                             <div class="hero-buttons">
-                                <button class="btn btn-primary" onclick="addToCart('PawSync Smart Automatic Pet Feeder')">ADD TO CART</button>
+                                <button class="btn btn-primary" onclick="addToCart('Smart Automatic Pet Feeder', 129.99)">ADD TO CART</button>
                                 <button class="btn btn-secondary" onclick="switchPage('shop')">VIEW ALL PRODUCTS</button>
                             </div>
                         </div>
@@ -1158,7 +1280,7 @@
                                 <div class="stars">★★★★★</div>
                                 <p class="product-card-desc">Schedule meals, manage portions, and maintain a consistent routine through smartphone app connectivity.</p>
                                 <div class="product-card-price">CAD $129.99</div>
-                                <button class="btn btn-primary btn-full" onclick="addToCart('Smart Automatic Pet Feeder')">ADD TO CART</button>
+                                <button class="btn btn-primary btn-full" onclick="addToCart('Smart Automatic Pet Feeder', 129.99)">ADD TO CART</button>
                             </div>
                         </div>
 
@@ -1170,7 +1292,7 @@
                                 <div class="stars">★★★★★</div>
                                 <p class="product-card-desc">Check in on your pets anytime with HD live streaming, night vision, and motion-tracking alerts.</p>
                                 <div class="product-card-price">CAD $69.99</div>
-                                <button class="btn btn-primary btn-full" onclick="addToCart('PawSync Pet Camera')">ADD TO CART</button>
+                                <button class="btn btn-primary btn-full" onclick="addToCart('PawSync Pet Camera', 69.99)">ADD TO CART</button>
                             </div>
                         </div>
 
@@ -1182,7 +1304,7 @@
                                 <div class="stars">★★★★★</div>
                                 <p class="product-card-desc">Continuous flowing water with dynamic filtration to encourage hydration and keep water fresh.</p>
                                 <div class="product-card-price">CAD $79.99</div>
-                                <button class="btn btn-primary btn-full" onclick="addToCart('PawSync Smart Water Fountain')">ADD TO CART</button>
+                                <button class="btn btn-primary btn-full" onclick="addToCart('PawSync Smart Water Fountain', 79.99)">ADD TO CART</button>
                             </div>
                         </div>
 
@@ -1194,7 +1316,7 @@
                                 <div class="stars">★★★★★</div>
                                 <p class="product-card-desc">Reward and interact with your pets remotely by tossing treats right from your phone.</p>
                                 <div class="product-card-price">CAD $59.99</div>
-                                <button class="btn btn-primary btn-full" onclick="addToCart('PawSync Smart Treat Dispenser')">ADD TO CART</button>
+                                <button class="btn btn-primary btn-full" onclick="addToCart('PawSync Smart Treat Dispenser', 59.99)">ADD TO CART</button>
                             </div>
                         </div>
                     </div>
@@ -1222,7 +1344,103 @@
         </section>
 
         <!-- ==========================================
-             PAGE 3: ABOUT PAGE
+             PAGE 3: CHECKOUT PAGE (MOCK DEMO SCREEN)
+             ========================================== -->
+        <section id="checkout" class="page">
+            <div class="checkout-section">
+                <div class="container">
+                    <div class="checkout-header">
+                        <h1>Order Checkout Preview</h1>
+                        <p>Review your cart and test the checkout flow.</p>
+                    </div>
+
+                    <div class="demo-notice-banner">
+                        ⚡ <strong>Demo Mode:</strong> No actual payment processing will occur. You can freely test placing an order!
+                    </div>
+
+                    <div class="checkout-grid">
+                        <!-- Left: Order Summary / Cart Items -->
+                        <div class="cart-summary-box">
+                            <h2>1. Order Summary</h2>
+                            <div id="checkoutCartItemsList" style="margin-top: 20px;">
+                                <!-- Items dynamically rendered by JavaScript -->
+                            </div>
+
+                            <div class="cart-total-summary">
+                                <div class="summary-line">
+                                    <span>Subtotal</span>
+                                    <span id="subtotalAmount">CAD $0.00</span>
+                                </div>
+                                <div class="summary-line">
+                                    <span>Standard Shipping</span>
+                                    <span>FREE</span>
+                                </div>
+                                <div class="summary-line">
+                                    <span>Estimated Tax (13% HST)</span>
+                                    <span id="taxAmount">CAD $0.00</span>
+                                </div>
+                                <div class="summary-line total">
+                                    <span>Total</span>
+                                    <span id="totalAmount">CAD $0.00</span>
+                                </div>
+                            </div>
+
+                            <button class="btn btn-secondary btn-full" style="margin-top: 20px;" onclick="switchPage('shop')">← CONTINUE SHOPPING</button>
+                        </div>
+
+                        <!-- Right: Mock Payment / Shipping Form -->
+                        <div class="checkout-form-box">
+                            <span class="mock-badge">TEST CHECKOUT FORM</span>
+                            <h2 style="margin-bottom: 20px;">2. Shipping & Payment</h2>
+                            
+                            <form onsubmit="handleDemoCheckout(event)">
+                                <div class="form-group">
+                                    <label>Full Name</label>
+                                    <input type="text" required placeholder="Jane Doe" value="Brooke Piette">
+                                </div>
+                                <div class="form-group">
+                                    <label>Email Address</label>
+                                    <input type="email" required placeholder="jane@example.com" value="customer@pawsync.com">
+                                </div>
+                                <div class="form-group">
+                                    <label>Shipping Address</label>
+                                    <input type="text" required placeholder="123 Main St, City, Province, Postal Code" value="1234 Fallsview Blvd, Niagara Falls, ON">
+                                </div>
+
+                                <hr style="border: 0; border-top: 1px solid var(--gray-border); margin: 20px 0;">
+
+                                <h3>Payment Method</h3>
+                                <p style="font-size: 0.85rem; color: #666; margin-bottom: 15px;">Simulated credit card checkout:</p>
+
+                                <div class="form-group">
+                                    <label>Cardholder Name</label>
+                                    <input type="text" required placeholder="Name on Card" value="Brooke Piette">
+                                </div>
+                                <div class="form-group">
+                                    <label>Mock Card Number</label>
+                                    <input type="text" required placeholder="4532 •••• •••• 8888" value="4532 0000 0000 8888">
+                                </div>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                    <div class="form-group">
+                                        <label>Expiry</label>
+                                        <input type="text" required placeholder="MM/YY" value="12/28">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>CVC</label>
+                                        <input type="text" required placeholder="123" value="123">
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary btn-full" style="margin-top: 10px; font-size: 1.1rem;">COMPLETE DEMO ORDER</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             PAGE 4: ABOUT PAGE
              ========================================== -->
         <section id="about" class="page">
             <div class="about-section">
@@ -1265,7 +1483,7 @@
         </section>
 
         <!-- ==========================================
-             PAGE 4: FAQ PAGE
+             PAGE 5: FAQ PAGE
              ========================================== -->
         <section id="faq" class="page">
             <div class="faq-section">
@@ -1337,7 +1555,7 @@
         </section>
 
         <!-- ==========================================
-             PAGE 5: CONTACT PAGE
+             PAGE 6: CONTACT PAGE
              ========================================== -->
         <section id="contact" class="page">
             <div class="contact-section">
@@ -1400,6 +1618,7 @@
                     <h4>Quick Links</h4>
                     <ul>
                         <li><a href="#shop" onclick="switchPage('shop'); return false;">Shop</a></li>
+                        <li><a href="#checkout" onclick="switchPage('checkout'); return false;">Checkout Preview</a></li>
                         <li><a href="#about" onclick="switchPage('about'); return false;">About</a></li>
                         <li><a href="#faq" onclick="switchPage('faq'); return false;">FAQ</a></li>
                         <li><a href="#contact" onclick="switchPage('contact'); return false;">Contact</a></li>
@@ -1441,7 +1660,7 @@
     <div id="toast" class="alert-toast">Notification message</div>
 
     <!-- ==========================================
-         JAVASCRIPT CONTROLLERS
+         JAVASCRIPT CONTROLLERS & CART SYSTEM
          ========================================== -->
     <script>
         // Page Navigation Logic
@@ -1467,6 +1686,11 @@
 
             // Close mobile menu if open
             document.getElementById('navMenu').classList.remove('active');
+
+            // Render checkout summary whenever checkout page is viewed
+            if (pageId === 'checkout') {
+                renderCheckoutUI();
+            }
 
             // Scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1500,12 +1724,93 @@
             }
         }
 
-        // Cart System
-        let cartCount = 0;
-        function addToCart(productName) {
-            cartCount += 1;
-            document.getElementById('cartCount').innerText = cartCount;
-            showToast(`Added 1x ${productName} to your cart!`);
+        /* ==========================================
+           CART & CHECKOUT SYSTEM LOGIC
+           ========================================== */
+        // Default demo item preloaded in cart so user can test checkout immediately!
+        let cart = [
+            { name: "Smart Automatic Pet Feeder", price: 129.99, qty: 1 }
+        ];
+
+        function addToCart(productName, price) {
+            const existingItem = cart.find(item => item.name === productName);
+            if (existingItem) {
+                existingItem.qty += 1;
+            } else {
+                cart.push({ name: productName, price: price, qty: 1 });
+            }
+            updateCartBadge();
+            showToast(`Added 1x ${productName} to your cart! Click Cart to view checkout.`);
+        }
+
+        function changeQuantity(index, delta) {
+            cart[index].qty += delta;
+            if (cart[index].qty <= 0) {
+                cart.splice(index, 1);
+            }
+            updateCartBadge();
+            renderCheckoutUI();
+        }
+
+        function updateCartBadge() {
+            const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+            document.getElementById('cartCount').innerText = totalCount;
+        }
+
+        function renderCheckoutUI() {
+            const listContainer = document.getElementById('checkoutCartItemsList');
+            if (!listContainer) return;
+
+            if (cart.length === 0) {
+                listContainer.innerHTML = '<p style="color: #777; font-style: italic;">Your cart is currently empty. Add products from the shop!</p>';
+                document.getElementById('subtotalAmount').innerText = 'CAD $0.00';
+                document.getElementById('taxAmount').innerText = 'CAD $0.00';
+                document.getElementById('totalAmount').innerText = 'CAD $0.00';
+                return;
+            }
+
+            let html = '';
+            let subtotal = 0;
+
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.qty;
+                subtotal += itemTotal;
+                html += `
+                    <div class="cart-item-row">
+                        <div class="cart-item-details">
+                            <strong>${item.name}</strong>
+                            <span>CAD $${item.price.toFixed(2)} each</span>
+                        </div>
+                        <div class="cart-qty-controls">
+                            <button class="qty-btn" onclick="changeQuantity(${index}, -1)">-</button>
+                            <span>${item.qty}</span>
+                            <button class="qty-btn" onclick="changeQuantity(${index}, 1)">+</button>
+                            <span style="font-weight: 600; width: 75px; text-align: right;">CAD $${itemTotal.toFixed(2)}</span>
+                        </div>
+                    </div>
+                `;
+            });
+
+            const tax = subtotal * 0.13; // 13% tax
+            const total = subtotal + tax;
+
+            listContainer.innerHTML = html;
+            document.getElementById('subtotalAmount').innerText = `CAD $${subtotal.toFixed(2)}`;
+            document.getElementById('taxAmount').innerText = `CAD $${tax.toFixed(2)}`;
+            document.getElementById('totalAmount').innerText = `CAD $${total.toFixed(2)}`;
+        }
+
+        // Handle Demo Checkout Form Submit
+        function handleDemoCheckout(event) {
+            event.preventDefault();
+            if (cart.length === 0) {
+                alert("Your cart is empty! Add some items before placing an order.");
+                return;
+            }
+            showToast('🎉 Demo Order Placed Successfully! Thank you for testing PawSync.');
+            cart = [];
+            updateCartBadge();
+            renderCheckoutUI();
         }
 
         // Form Handlers
@@ -1533,8 +1838,9 @@
 
         // Handle URL Hash navigation on load
         window.addEventListener('load', () => {
+            updateCartBadge();
             const hash = window.location.hash.replace('#', '');
-            if (['home', 'shop', 'about', 'faq', 'contact'].includes(hash)) {
+            if (['home', 'shop', 'checkout', 'about', 'faq', 'contact'].includes(hash)) {
                 switchPage(hash);
             }
         });
